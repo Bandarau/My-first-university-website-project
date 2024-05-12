@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community | Green earth solutions</title>
+  <link rel="stylesheet" href="Community.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <a href="home.html"><img src="Green-01.png" class="logo"></a>
+
+      <ul>
+        <li><a href="Issues.html">Environment Issues</a></li>
+        <li><a href="solutions.html">solutions</a></li>
+        <li><a href="Event.html">Event</a></li>
+        <li><a href="Community.html">Community</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="heading">
+    <h1>Community</h1>
+  </div>
+  <div id="app">
+    <div class="feedback-section">
+      <h1>Communication & Feedback</h1>
+      <div class="form-container">
+        <form @submit.prevent="submitFeedback">
+          <div class="form-group">
+            <input v-model="name" type="text" id="name" placeholder="Name" required />
+          </div>
+          <div class="form-group">
+            <input v-model="email" type="email" id="email" placeholder="Email" required />
+          </div>
+          <div class="form-group">
+            <textarea v-model="message" id="message" placeholder="Message" required></textarea>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div class="contact-info">
+        <h2>Feedback Messages</h2>
+        <div v-for="feedback in feedbackMessages" :key="feedback.id" class="display">
+          <p><strong>Name:</strong> {{ feedback.name }}</p>
+          <p><strong>Email:</strong> {{ feedback.email }}</p>
+          <p><strong>Message:</strong> {{ feedback.message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        name: '',
+        email: '',
+        message: '',
+        showSuccessMessage: false,
+        feedbackMessages: []
+      },
+      methods: {
+        submitFeedback() {
+          // Create a new feedback object
+          const feedback = {
+            id: Date.now(), // Unique ID based on the current timestamp
+            name: this.name,
+            email: this.email,
+            message: this.message
+          };
+
+          // Add the feedback to the feedbackMessages array
+          this.feedbackMessages.push(feedback);
+
+          // Reset the form fields and show the success message
+          this.name = '';
+          this.email = '';
+          this.message = '';
+          this.showSuccessMessage = true;
+
+          // Hide the success message after 3 seconds
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000);
+        }
+      }
+    });
+  </script>
+
+  <footer>
+    <ul class="social_icon">
+      <li><a href="https://web.facebook.com/profile.php?id=100087896216914"><ion-icon
+            name="logo-facebook"></ion-icon></a></li>
+      <li><a href="https://twitter.com/i/flow/single_sign_on"><ion-icon name="logo-twitter"></ion-icon></a></li>
+      <li><a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_nav-header-signin"><ion-icon
+            name="logo-linkedin"></ion-icon></a></li>
+      <li><a href="https://github.com/Bandarau"><ion-icon name="logo-github"></ion-icon></a></li>
+    </ul>
+    <ul class="menu">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="Issues.html">Environment Issues</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="Event.html">Event</a></li>
+      <li><a href="Community.html">Community</a></li>
+      <li><a href="about.html">About us</a></li>
+    </ul>
+    <p>&copy2024 design by <a href="https://oulms.ou.ac.lk/user/profile.php">Udara Sandaruwan</a> | All Rights Reserved
+    </p>
+  </footer>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
